@@ -1,0 +1,81 @@
+import React from 'react';
+import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
+
+const menuItems = [
+  {
+    name: 'Burger',
+    description: 'Delicious burger with cheese and vegetables',
+    price: '499',
+    image: require('./assets/burger.jpg'),
+  },
+  {
+    name: 'Pizza',
+    description: 'Margherita pizza with tomato, mozzarella, and basil',
+    price: '799',
+    image: require('./assets/pizza.jpg'),
+  },
+  // Add more menu items here
+];
+
+const MenuItem = ({ item }) => (
+  <View style={styles.menuItem}>
+    <Image source={item.image} style={styles.menuItemImage} />
+    <Text style={styles.menuItemName}>{item.name}</Text>
+    <Text style={styles.menuItemDescription}>{item.description}</Text>
+    <Text style={styles.menuItemPrice}>Price: {item.price}</Text>
+  </View>
+);
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Restaurant Menu</Text>
+      <FlatList
+        data={menuItems}
+        renderItem={({ item }) => <MenuItem item={item} />}
+        keyExtractor={(item) => item.name}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    padding: 16,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 16,
+  },
+  menuItem: {
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    padding: 16,
+  },
+  menuItemImage: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'cover',
+    borderRadius: 8,
+  },
+  menuItemName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 8,
+  },
+  menuItemDescription: {
+    fontSize: 16,
+    marginTop: 4,
+  },
+  menuItemPrice: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 8,
+  },
+});
